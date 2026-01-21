@@ -14,7 +14,6 @@ function Extension() {
     type: 'product',
   });
 
-  // Helper function to extract numeric ID from GID
   const extractIdFromGid = (gid) => {
     if (typeof gid === 'string' && gid.includes('/')) {
       return gid.split('/').pop();
