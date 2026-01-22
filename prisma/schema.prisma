@@ -14,21 +14,37 @@ datasource db {
 }
 
 model Session {
-  id            String    @id
-  shop          String
-  state         String
-  isOnline      Boolean   @default(false)
-  scope         String?
-  expires       DateTime?
-  accessToken   String
-  userId        BigInt?
-  firstName     String?
-  lastName      String?
-  email         String?
-  accountOwner  Boolean   @default(false)
-  locale        String?
-  collaborator  Boolean?  @default(false)
-  emailVerified Boolean?  @default(false)
+  id                  String    @id
+  shop                String
+  state               String
+  isOnline            Boolean   @default(false)
+  scope               String?
+  expires             DateTime?
+  accessToken         String
+  userId              BigInt?
+  firstName           String?
+  lastName            String?
+  email               String?
+  accountOwner        Boolean   @default(false)
+  locale              String?
+  collaborator        Boolean?  @default(false)
+  emailVerified       Boolean?  @default(false)
   refreshToken        String?
   refreshTokenExpires DateTime?
+}
+
+model CarFuelType {
+  id   Int    @id @default(autoincrement())
+  name String
+  cars Car[]
+}
+
+model Car {
+  id           Int         @id @default(autoincrement())
+  brand        String
+  licensePlace String      @unique
+  year         Int
+  fuelTypeId   Int
+  fuelType     CarFuelType @relation(fields: [fuelTypeId], references: [id])
+  driverName   String?
 }
